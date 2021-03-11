@@ -10,12 +10,14 @@ services:
       - 8000:8000
     depends_on:
       - db
+    environment:
+      - "DJANGO_SECRET_KEY=byb&whfoo-rn73z7=s)$$3b+89s^z8l4bhy#qn^&k&@z50hurdq"
+      - "DJANGO_DEBUG=True"
   db:
     image: postgres:11
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
-
 volumes:
   postgres_data:
