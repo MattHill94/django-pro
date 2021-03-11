@@ -38,10 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Third-party
+    'crispy_forms', # new
+
     #Local
     'accounts',
     'pages',
 ]
+
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4' 
 
 
 
@@ -129,6 +135,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles')) # new
+STATICFILES_FINDERS = [ # new
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+
+
 
 AUTH_USER_MODEL = 'accounts.CustomUser' # new
 
