@@ -1,27 +1,32 @@
-import uuid # new
+import uuid
 from django.contrib.auth import get_user_model # new
 from django.db import models
-from django.urls import reverse # new
-
+from django.urls import reverse
 
 
 class Book(models.Model):
-    id = models.UUIDField(
+    id = models.UUIDField( # new
         primary_key=True,
         default=uuid.uuid4,
         editable=False)
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    cover = models.ImageField(upload_to='covers/', blank=True) # new
+    cover = models.ImageField(upload_to='covers/', blank=True)
+
+    class Meta: # new
+        permissions = [
+            ('special_status', 'Can read all books'),
+        ]
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('book_detail', kwargs={'pk': str(self.pk)})
-        
-class Review(models.Model): # new
+        return reverse('book_detail', args=[str(self.id)])
+
+
+class Review(models.Model): 
     book = models.ForeignKey(
         Book,
         on_delete=models.CASCADE,
