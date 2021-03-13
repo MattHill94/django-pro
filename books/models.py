@@ -1,11 +1,12 @@
+
 import uuid
-from django.contrib.auth import get_user_model # new
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
 
 class Book(models.Model):
-    id = models.UUIDField( # new
+    id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
         editable=False)
@@ -14,9 +15,12 @@ class Book(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     cover = models.ImageField(upload_to='covers/', blank=True)
 
-    class Meta: # new
+    class Meta:
+        indexes = [ # new
+            models.Index(fields=['id'], name='id_index'),
+        ]
         permissions = [
-            ('special_status', 'Can read all books'),
+            ("special_status", "Can read all books"),
         ]
 
     def __str__(self):
@@ -26,7 +30,7 @@ class Book(models.Model):
         return reverse('book_detail', args=[str(self.id)])
 
 
-class Review(models.Model): 
+class Review(models.Model):
     book = models.ForeignKey(
         Book,
         on_delete=models.CASCADE,
