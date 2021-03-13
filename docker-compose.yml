@@ -19,6 +19,7 @@ services:
       - "DJANGO_SECURE_HSTS_PRELOAD=False"
       - "DJANGO_SESSION_COOKIE_SECURE=False"
       - "DJANGO_CSRF_COOKIE_SECURE=False"
+
   db:
     image: postgres:11
     volumes:
@@ -28,5 +29,3 @@ services:
 
 volumes:
   postgres_data:
-
-    
