@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'whitenoise.runserver_nostatic', # new
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware', # new
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.runserver_nostatic', # new
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -56,6 +58,8 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware', # new
     'django.middleware.cache.FetchFromCacheMiddleware', # new
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # new
 
 ROOT_URLCONF = 'config.urls'
 
